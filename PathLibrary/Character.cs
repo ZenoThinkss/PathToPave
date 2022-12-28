@@ -1,4 +1,11 @@
-﻿namespace PathLibrary
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PathLibrary
 {
     public abstract class Character
     {
@@ -30,7 +37,10 @@
         
         }
 
-        public Character() { }
+        public Character()
+        {
+
+        }
 
         //Methods - Monkeys
 
@@ -40,12 +50,12 @@
                 $"Life: {Life} of {MaxLife}\n" +
                 $"Hit Chance: {HitChance}%\n" +
                 $"Block: {Block}";
-        }
+        }//end ToString
 
         //TODO clacBLock()
         //TODO calcDamage()
+     
 
 
-
-    }
-}
+    }//end class
+}//end namespace
