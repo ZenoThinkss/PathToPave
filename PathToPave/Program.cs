@@ -1,4 +1,5 @@
-﻿using System.Dynamic;
+﻿using System.Data;
+using System.Dynamic;
 using System.Transactions;
 
 namespace PathToPave
@@ -41,10 +42,10 @@ namespace PathToPave
 
                 Console.Clear();
 
-                //TODO create a random Get room 
+                
                 Console.WriteLine(GetRoom());
                 
-                
+                //inner loop:
                 #region Gameplay loop
                 bool reload = false;
 
@@ -53,7 +54,11 @@ namespace PathToPave
 
                     #region Gameplay Menu
 
-                    Console.WriteLine("W) Attack\n" + "A) Player Info\n" + "S) Run Away\n" + "D) Monster Info\n" + "X) Exit\n" + "");
+                    Console.WriteLine("W) Attack\n" + 
+                        "A) Player Info\n" + 
+                        "S) Run Away\n" + 
+                        "D) Monster Info\n" + 
+                        "X) Exit\n");
 
                     string menuChoice = Console.ReadKey(true).Key.ToString();
 
@@ -63,8 +68,8 @@ namespace PathToPave
                         case "W":
                             //TODO Combat
                             
-                            Console.WriteLine("Attacking");
-                            reload= true;
+                            Console.WriteLine("Attacking.....\n");
+                           
                             break;
 
                         case "A":
@@ -113,43 +118,87 @@ namespace PathToPave
         private static string GetRoom() 
         {
 
-            string[][] rooms = 
+            
+
+            string[][] rooms = new string[3][];
+
+            rooms[0] = new string[3];
+
+            rooms[0] = new string[] 
             {
-                new string[] 
-                {
-                        "Small room wet, mildewy smell, dimly lit by candles attached to the wall, cob webs covering the corner and the single small round table in the corner",
-                        "small room with nothing but a chest on the opposite side of the entrance ",
-                        "room with no light"
-
-                },
-                new string[] 
-                {
-                     "medium room with bright light that is almost blinding  you have to cover your eyes with your hand like a visor in order to see",
-                    "medium room with only a single light coming in from a small window toward the top of one of the walls the light lands on a door across the room from you",
-                     "medium room with a dining table spanning from one side of the room to the other with delicious smelling food is laid out across it"
+                 "\n\nSmall room wet, mildewy smell, dimly lit by candles attached to the wall, cob webs covering the corner and the single small round table in the corner\n\n",
+                "\n\nsmall room with nothing but a chest on the opposite side of the entrance ",
+                        "room with no light\n\n"
 
 
-                },
-
-                new string[] 
-                {
-
-                     "large sized room with what looks to be a set of large dog kennels across the left and right walls",
-                    "Large room with plants hanging from the cieling and a fountain in the center",
-                     "Large room with a very low ceiling you have to crouch to enter"
-
-                }
 
             };
+
+            rooms[1] = new string[3];
+
+            rooms[1] = new string[]
+            {
+                     "\n\nmedium room with bright light that is almost blinding  you have to cover your eyes with your hand like a visor in order to see\n\n",
+                    "\n\nmedium room with only a single light coming in from a small window toward the top of one of the walls the light lands on a door across the room from you\n\n",
+                     "\n\nmedium room with a dining table spanning from one side of the room to the other with delicious smelling food is laid out across it\n\n"
+
+
+            };
+
+            rooms[2] = new string[3];
+
+
+            rooms[2] = new string[]
+            {
+
+                     "\n\nlarge sized room with what looks to be a set of large dog kennels across the left and right walls\n\n",
+                    "\n\nLarge room with plants hanging from the cieling and a fountain in the center\n\n",
+                     "\n\nLarge room with a very low ceiling you have to crouch to enter\n\n"
+
+            };
+
+            
 
           
             Random rand = new Random();
             int index = rand.Next(rooms.Length);
             string room = rooms[index][index];
+
+
+
+
+
+            int orignalWidth = Console.WindowWidth;
+            int orignalHeight = Console.WindowHeight;
+
+
+
+            if (room == rooms[0][0] || room == rooms[0][1] || room == rooms[0][2] )
+            {
+                
+                int width = orignalWidth / 2;
+                int height = orignalHeight / 2;
+                Console.SetWindowSize(width, height);
+
+            }
+            else if (room == rooms[2][0] || room == rooms[2][1] || room == rooms[2][2])
+            {
+              
+                int width = orignalWidth * 2;
+                int height = orignalHeight * 1;
+                Console.SetWindowSize(width, height);
+
+
+            }
+            else 
+            {
+
+                orignalWidth = Console.WindowWidth;
+                orignalHeight = Console.WindowHeight;
+
+            }
+
             return room;
-
-
-
 
         }//end GetRoom()
 
